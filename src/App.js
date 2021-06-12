@@ -1,24 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BookDetailsPage, HomePage } from "./pages";
+import GlobalStyle from "./styles/globalStyles";
+import { ApolloClient, ApolloProvider } from "@apollo/client";
+
+import CartProvider from "./contexts/CartContext";
+import BooksProvider from "./contexts/BooksContext";
+import { cache } from "./components/cart/cache";
 
 function App() {
+  const client = new ApolloClient({
+    uri: "https://quidax-feec-graphql.herokuapp.com/graphql",
+    cache: cache,
+  });
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <ApolloProvider client={client}>
+        <GlobalStyle />
+
+        <Switch>
+          <Route exact path="/" component={HomePage} />
+          <Route path="/book-details/:id" component={BookDetailsPage} />
+        </Switch>
+      </ApolloProvider>
+    </Router>
   );
 }
 
