@@ -104,6 +104,8 @@ export const removeItemFromCart = (cartItem) => {
   const bookInCartIndex = cartItemsVar().indexOf(cartItem);
   cartItemsVar().splice(bookInCartIndex, 1);
   cartItemsVar([...cartItemsVar()]);
+
+  calculateSubtotal();
 };
 
 export const closeCart = () => {
