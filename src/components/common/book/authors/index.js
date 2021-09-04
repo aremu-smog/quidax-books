@@ -1,8 +1,8 @@
-import React from "react";
-import BookMeta from "../meta";
+import React from "react"
+import BookMeta from "../meta"
 
-const BookAuthors = ({ authors = [] }) => {
-  return <BookMeta value={authors} />;
-};
+const BookAuthors = ({ authors = [], isInline }) => {
+  return <BookMeta value={authors} isInline={isInline} />
+}
 
-export default BookAuthors;
+export default BookAuthors

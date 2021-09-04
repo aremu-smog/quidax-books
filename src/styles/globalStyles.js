@@ -30,6 +30,7 @@ body {
     font-family: Ubuntu;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    font-size: 14px;
   }
   
 button{

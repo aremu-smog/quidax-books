@@ -1,6 +1,6 @@
-import React from "react";
-import styled, { css } from "styled-components";
-import MetaList from "./lists";
+import React from "react"
+import styled, { css } from "styled-components"
+import MetaList from "./lists"
 
 const Meta = styled.div`
   p {
@@ -10,37 +10,28 @@ const Meta = styled.div`
   span {
     font-weight: normal !important;
   }
-  text-align: ${(props) => (props.center ? "center" : "left")};
+  text-align: ${props => (props.center ? "center" : "left")};
 
-  ${(props) =>
-    props.isHalfOnMobile &&
-    css`
-      @media screen and (max-width: 768px) {
-        width: 48%;
-        margin-top: 12px;
-      }
-    `}
-`;
-const BookMeta = ({ title, value, center, featured, half_no_mobile }) => {
+  display: ${props => props.isInline && `inline-block`};
+`
+
+const MetaValue = styled.p`
+  margin-top: 4px !important;
+`
+const BookMeta = ({ title, value, center, featured, isInline }) => {
   //Check if the value passed is a string
-  const valueIsArray = Array.isArray(value);
-  // console.log(value);
+  const valueIsArray = Array.isArray(value)
 
-  // console.log(valueIsString);
   return (
-    <Meta center={center} isHalfOnMobile={half_no_mobile}>
+    <Meta center={center} isInline={isInline}>
       <p>
         <b>{title}</b>
       </p>
-      <p>
-        {valueIsArray ? (
-          <MetaList items={value} isFeatured={featured} />
-        ) : (
-          value
-        )}
-      </p>
+      <MetaValue>
+        {valueIsArray ? <MetaList items={value} isFeatured={featured} /> : value}
+      </MetaValue>
     </Meta>
-  );
-};
+  )
+}
 
-export default BookMeta;
+export default BookMeta

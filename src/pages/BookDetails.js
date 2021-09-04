@@ -1,8 +1,8 @@
-import { gql, useQuery } from "@apollo/client";
-import React from "react";
-import BookContainer from "../components/book-details/container";
+import { gql, useQuery } from "@apollo/client"
+import React from "react"
+import BookContainer from "../components/book-details/container"
 
-import Layout from "../components/common/layout";
+import Layout from "../components/common/layout"
 
 const GET_BOOK = gql`
   query Book($id: String) {
@@ -24,16 +24,17 @@ const GET_BOOK = gql`
       price
       number_of_purchases
       likes
+      publisher
       published_at
       available_copies
       full_description
     }
   }
-`;
-const BookDetailsPage = (props) => {
-  const { id } = props.match.params;
+`
+const BookDetailsPage = props => {
+  const { id } = props.match.params
 
-  const { loading, error, data } = useQuery(GET_BOOK, { variables: { id } });
+  const { loading, error, data } = useQuery(GET_BOOK, { variables: { id } })
 
   return (
     <Layout>
@@ -45,7 +46,7 @@ const BookDetailsPage = (props) => {
         <BookContainer book={data.books[0]} />
       )}
     </Layout>
-  );
-};
+  )
+}
 
-export default BookDetailsPage;
+export default BookDetailsPage

@@ -1,9 +1,9 @@
-import React from "react";
-import styled from "styled-components";
-import { HideOnMobile } from "../../../styles/common";
-import BookCopies from "../../common/book/copies";
-import BookPrice from "../../common/book/price";
-import BookDetailsAddToCart from "../add-to-cart";
+import React from "react"
+import styled from "styled-components"
+import { HideOnMobile } from "../../../styles/common"
+import BookCopies from "../../common/book/copies"
+import BookPrice from "../../common/book/price"
+import BookDetailsAddToCart from "../add-to-cart"
 
 const Sidebar = styled.section`
   width: 243px;
@@ -19,44 +19,38 @@ const Sidebar = styled.section`
       width: 133px;
     }
   }
-`;
+`
 
 const Inner = styled.div`
   position: sticky;
   top: 0;
-  @media screen and (max-width: 568px) {
+  @media screen and (max-width: 768px) {
     position: static;
   }
-`;
+`
 
 const Img = styled.img`
   box-shadow: 0px 30px 30px 0px #00000026;
   margin-bottom: 36px;
-  position: sticky;
-  top: 0;
-`;
+  /* position: sticky; */
+  /* top: 0; */
+`
 
-const BookDetailsSidebar = ({
-  image_url,
-  price,
-  copies,
-  id,
-  available_copies,
-}) => {
+const BookDetailsSidebar = ({ image_url, price, copies, id, available_copies }) => {
   return (
     <Sidebar>
       <Inner>
         <Img src={image_url} />
         <HideOnMobile>
-          <BookCopies no_of_copies={copies} />
+          <BookCopies no_of_copies={available_copies} />
           <BookPrice amount={price} large />
         </HideOnMobile>
         {available_copies > 0 ? (
-          <BookDetailsAddToCart copies={copies} id={id} price={price} />
+          <BookDetailsAddToCart copies={available_copies} id={id} price={price} />
         ) : null}
       </Inner>
     </Sidebar>
-  );
-};
+  )
+}
 
-export default BookDetailsSidebar;
+export default BookDetailsSidebar
