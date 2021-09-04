@@ -1,7 +1,9 @@
-import { createGlobalStyle } from "styled-components";
+import { createGlobalStyle } from "styled-components"
 
-import Ubuntu from "./fonts/Ubuntu-Regular.ttf";
-import UbuntuBold from "./fonts/Ubuntu-Bold.ttf";
+import { qbGreen, qbRed } from "./colors"
+
+import Ubuntu from "./fonts/Ubuntu-Regular.ttf"
+import UbuntuBold from "./fonts/Ubuntu-Bold.ttf"
 
 const GlobalStyle = createGlobalStyle`
     @font-face {
@@ -62,17 +64,17 @@ a{
 }
 
 .swiper-pagination-bullet-active{
-    background-color: var(--qb-green) !important;
+    background-color: ${qbGreen} !important;
 }
 
 .available{
     font-size: 12px;
-    color: var(--qb-green);
+    color: ${qbGreen};
 }
 
 .out-of-stock{
     font-size: 12px;
-    color: var(--qb-red);
+    color: ${qbRed};
 }
 
 .swiper-button-prev{
@@ -105,6 +107,6 @@ a{
 
 
 
-`;
+`
 
-export default GlobalStyle;
+export default GlobalStyle
