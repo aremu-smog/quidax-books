@@ -4,7 +4,6 @@ import Button from "../../common/button";
 import { HideOnPc, HideOnMobile } from "../../../styles/common";
 import BookCopies from "../../common/book/copies";
 import BookPrice from "../../common/book/price";
-import { useCartContext } from "../../../contexts/CartContext";
 import { addItemToCart } from "../../cart/cache";
 
 const AddToCart = styled.div`
@@ -38,7 +37,7 @@ const BookDetailsAddToCart = ({ copies, price, id }) => {
   return (
     <AddToCart>
       <Button
-        action={() => addItemToCart(id)}
+        action={() => addItemToCart(id, copies)}
         text={
           <>
             <HideOnPc display="block">

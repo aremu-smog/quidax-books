@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import { useCartContext } from "../../../../../contexts/CartContext";
 import { addItemToCart } from "../../../../cart/cache";
 
 const Button = styled.button`
@@ -14,12 +13,12 @@ const Button = styled.button`
     margin-left: -8px;
   }
 `;
-const AllBookItemAddToCart = ({ book_id }) => {
+const AllBookItemAddToCart = ({ book_id, book_copies, book_price }) => {
   // const { addItemToCart } = useCartContext();
   const addToCart = (e) => {
     e.preventDefault();
 
-    addItemToCart(book_id);
+    addItemToCart(book_id, book_copies, book_price);
     // addItemToCart(book_id);
   };
 

@@ -1,16 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 import { qbOutlineGray } from "../../../styles/colors";
-import {
-  BookTitle,
-  BookMeta,
-  BookPrice,
-  BookAuthors,
-} from "../../common/book/";
+import { BookTitle, BookPrice, BookAuthors } from "../../common/book/";
 import RemoveFromCart from "./remove";
-import { useCartContext } from "../../../contexts/CartContext";
-import gql from "graphql-tag";
-import { useQuery } from "@apollo/client";
+import { increaseQuantity, decreaseQuantity } from "../cache";
+import { gql, useQuery } from "@apollo/client";
 
 const Wrapper = styled.div`
   display: flex;
@@ -73,10 +67,11 @@ const GET_BOOK_IN_CART = gql`
         name
       }
       price
+      available_copies
     }
   }
 `;
-const CartItem = ({ cartItem }) => {
+const CartItem = ({ cartItem, setSubTotal }) => {
   // alert(book_id);
 
   const cartItemId = cartItem.id;
@@ -84,8 +79,6 @@ const CartItem = ({ cartItem }) => {
   const { loading, error, data } = useQuery(GET_BOOK_IN_CART, {
     variables: { cartItemId },
   });
-
-  const { increaseQuantity, decreaseQuantity } = useCartContext();
 
   if (loading) {
     return "...";
@@ -96,6 +89,7 @@ const CartItem = ({ cartItem }) => {
   }
 
   const book = data.books[0];
+
   return (
     <Wrapper>
       <Img src={book.image_url} />
@@ -105,14 +99,18 @@ const CartItem = ({ cartItem }) => {
           <BookAuthors authors={book.authors} />
         </div>
 
-        <RemoveFromCart book={book} />
+        <RemoveFromCart cartItem={cartItem} />
       </Meta>
       <PriceQuantity>
         <BookPrice amount={book.price} />
         <QuantityToggleWrapper>
-          <button onClick={() => decreaseQuantity(book)}>-</button>
+          <button onClick={() => decreaseQuantity(cartItem)}>-</button>
           <div>{cartItemQuantity}</div>
-          <button onClick={() => increaseQuantity(book)}>+</button>
+          <button
+            onClick={() => increaseQuantity(cartItem, book.available_copies)}
+          >
+            +
+          </button>
         </QuantityToggleWrapper>
         <SubTotal>
           <BookPrice amount={book.price * cartItemQuantity} />

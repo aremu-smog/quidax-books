@@ -3,7 +3,6 @@ import React from "react";
 import BookContainer from "../components/book-details/container";
 
 import Layout from "../components/common/layout";
-import { useBooksContext } from "../contexts/BooksContext";
 
 const GET_BOOK = gql`
   query Book($id: String) {

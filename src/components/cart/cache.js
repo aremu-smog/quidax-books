@@ -6,6 +6,7 @@ export const cartContainerVar = makeVar([
     isOpen: false,
   },
 ]);
+export const subTotalVar = makeVar(0);
 
 export const cache = new InMemoryCache({
   typePolicies: {
@@ -21,28 +22,62 @@ export const cache = new InMemoryCache({
             return cartContainerVar();
           },
         },
+        subTotal: {
+          read() {
+            return subTotalVar();
+          },
+        },
       },
     },
   },
 });
 
-const increaseQuantity = (bookInCart) => {
-  bookInCart.quantity = bookInCart.quantity + 1;
-  // const the_book = books.filter((book) => book.id === bookInCart.id);
-  // if (bookInCart.quantity < the_book[0].available_copies) {
-  // }
+export const calculateSubtotal = () => {
+  const sum = cartItemsVar().reduce((sum, item) => {
+    return (sum += item.price * item.quantity);
+  }, 0);
+
+  subTotalVar(sum);
+};
+
+export const increaseQuantity = (bookInCart, bookQuantity) => {
+  if (bookInCart.quantity < bookQuantity) {
+    bookInCart.quantity = bookInCart.quantity + 1;
+  }
+
+  cartItemsVar([...cartItemsVar()]);
+
+  calculateSubtotal();
+};
+export const decreaseQuantity = (bookInCart) => {
+  if (bookInCart.quantity === 1) {
+    removeItemFromCart(bookInCart);
+  } else {
+    bookInCart.quantity = bookInCart.quantity - 1;
+  }
+  cartItemsVar([...cartItemsVar()]);
+
+  calculateSubtotal();
 };
 
 export const openCart = () => {
-  alert("Open cart");
-  const cartContainer = cartContainerVar();
-  cartContainer[0].isOpen = true;
+  cartContainerVar([
+    {
+      isOpen: true,
+    },
+  ]);
 };
 
-export const addItemToCart = (bookId) => {
+const getBook = (bookId) => {
   const bookInCart = cartItemsVar().filter(
     (cartItem) => cartItem.id === bookId
   );
+
+  return bookInCart;
+};
+
+export const addItemToCart = (bookId, bookQuantity, bookPrice) => {
+  const bookInCart = getBook(bookId);
 
   // Check if Item is in cart and only increase the quantity
 
@@ -52,17 +87,29 @@ export const addItemToCart = (bookId) => {
     const item = {
       id: bookId,
       quantity: 1,
+      price: bookPrice,
     };
 
     // Add the book to cart items
-    cartItemsVar([...cartItemsVar(), item]);
-    openCart();
+    cartItemsVar([item, ...cartItemsVar()]);
+
+    calculateSubtotal();
   } else {
-    increaseQuantity(bookInCart[0]);
+    increaseQuantity(bookInCart[0], bookQuantity);
   }
+  openCart();
+};
+
+export const removeItemFromCart = (cartItem) => {
+  const bookInCartIndex = cartItemsVar().indexOf(cartItem);
+  cartItemsVar().splice(bookInCartIndex, 1);
+  cartItemsVar([...cartItemsVar()]);
 };
 
 export const closeCart = () => {
-  const cartContainer = cartContainerVar();
-  cartContainer[0].isOpen = false;
+  cartContainerVar([
+    {
+      isOpen: false,
+    },
+  ]);
 };

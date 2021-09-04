@@ -20,7 +20,7 @@ const Grid = styled.section`
 
 const AllBooks = ({ books }) => {
   const showBooks = books.map((book) => {
-    return <AllBookItem book={book} />;
+    return <AllBookItem book={book} key={book.id} />;
   });
   return (
     <>

@@ -1,10 +1,10 @@
-import { useQuery, gql } from "@apollo/client";
 import React from "react";
 import styled from "styled-components";
-import { useCartContext } from "../../contexts/CartContext";
 import Button from "../common/button";
 import CartHeader from "./header";
 import CartItem from "./item";
+import { useReactiveVar } from "@apollo/client";
+import { cartContainerVar, cartItemsVar, subTotalVar } from "./cache";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -33,30 +33,20 @@ const CartContainer = styled.section`
   overflow-y: auto;
 `;
 
-export const GET_CART = gql`
-  query GetCartItems {
-    cartItems @client
-    cartContainer @client
-  }
-`;
-
 const Cart = () => {
-  const { loading, error, data } = useQuery(GET_CART);
-  // const { cartItems, cartIsOpen } = useCartContext();
+  const cartContainer = useReactiveVar(cartContainerVar);
+  const cartItems = useReactiveVar(cartItemsVar);
+  const subTotal = useReactiveVar(subTotalVar);
 
   return (
-    <Wrapper isOpen={data.cartContainer[0].isOpen}>
+    <Wrapper isOpen={cartContainer[0].isOpen}>
       <CartContainer>
         <CartHeader />
         <CartItems>
-          {loading
-            ? "Loading"
-            : error
-            ? "Error.."
-            : data.cartItems.map((cartItem) => (
-                <CartItem key={cartItem.id} cartItem={cartItem} />
-              ))}
-          {/* {booksInCart} */}
+          {cartItems.map((cartItem) => (
+            <CartItem key={cartItem.id} cartItem={cartItem} />
+          ))}
+          {subTotal}
           <Button text="Proceed to Checkout" />
         </CartItems>
       </CartContainer>

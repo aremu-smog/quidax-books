@@ -3,8 +3,6 @@ import { BookDetailsPage, HomePage } from "./pages";
 import GlobalStyle from "./styles/globalStyles";
 import { ApolloClient, ApolloProvider } from "@apollo/client";
 
-import CartProvider from "./contexts/CartContext";
-import BooksProvider from "./contexts/BooksContext";
 import { cache } from "./components/cart/cache";
 
 function App() {

@@ -70,7 +70,11 @@ const AllBookItem = ({ book }) => {
             <BookCopies no_of_copies={book.available_copies} />
           </Flex>
           {book.available_copies > 0 ? (
-            <AllBookItemAddToCart book_id={book.id} />
+            <AllBookItemAddToCart
+              book_id={book.id}
+              book_copies={book.available_copies}
+              book_price={book.price}
+            />
           ) : null}
         </Info>
       </Section>
