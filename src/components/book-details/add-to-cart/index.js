@@ -37,7 +37,7 @@ const BookDetailsAddToCart = ({ copies, price, id }) => {
   return (
     <AddToCart>
       <Button
-        action={() => addItemToCart(id, copies)}
+        action={() => addItemToCart(id, copies, price)}
         text={
           <>
             <HideOnPc display="block">

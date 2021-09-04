@@ -5,6 +5,7 @@ import CartHeader from "./header";
 import CartItem from "./item";
 import { useReactiveVar } from "@apollo/client";
 import { cartContainerVar, cartItemsVar, subTotalVar } from "./cache";
+import CartSubTotal from "./subtotal";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -36,7 +37,6 @@ const CartContainer = styled.section`
 const Cart = () => {
   const cartContainer = useReactiveVar(cartContainerVar);
   const cartItems = useReactiveVar(cartItemsVar);
-  const subTotal = useReactiveVar(subTotalVar);
 
   return (
     <Wrapper isOpen={cartContainer[0].isOpen}>
@@ -46,7 +46,7 @@ const Cart = () => {
           {cartItems.map((cartItem) => (
             <CartItem key={cartItem.id} cartItem={cartItem} />
           ))}
-          {subTotal}
+          <CartSubTotal />
           <Button text="Proceed to Checkout" />
         </CartItems>
       </CartContainer>
