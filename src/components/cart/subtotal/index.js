@@ -28,7 +28,7 @@ const CartSubTotal = () => {
     <SubTotalWrapper>
       <SubTotalText>Subtotal</SubTotalText>
 
-      <SubTotalValue>$ {subTotal}</SubTotalValue>
+      <SubTotalValue>$ {subTotal.toLocaleString()}</SubTotalValue>
     </SubTotalWrapper>
   );
 };

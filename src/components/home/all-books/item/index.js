@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import {
   BookTitle,
@@ -10,6 +10,8 @@ import {
 } from "../../../common/book/";
 import { Link } from "react-router-dom";
 import { formatDate } from "../../../../helpers/date";
+import { useReactiveVar } from "@apollo/client";
+import { cartItemsVar } from "../../../cart/cache";
 
 import AllBookItemAddToCart from "./add-to-cart";
 
@@ -44,6 +46,25 @@ const P = styled.p`
   line-height: 1.2;
 `;
 const AllBookItem = ({ book }) => {
+  const cartItems = useReactiveVar(cartItemsVar);
+
+  // const [availableCopiesOfBook, setAvailableCopiesOfBook] = useState(
+  //   book.available_copies
+  // );
+
+  const itemInCart = cartItems.filter((item) => item.id === book.id);
+  const availableCopiesOfBook =
+    book.available_copies -
+    (itemInCart.length === 1 ? itemInCart[0].quantity : 0);
+
+  // useEffect(() => {
+  //   const itemInCart = cartItems.filter((item) => item.id === book.id);
+
+  //   setAvailableCopiesOfBook(() => {
+  //     return book.available_copies - itemInCart[0]?.quantity || 0;
+  //   });
+  // }, [cartItems]);
+
   return (
     <Link to={`/book-details/${book.id}`}>
       <Section>
@@ -67,12 +88,12 @@ const AllBookItem = ({ book }) => {
 
           <Flex>
             <BookPrice amount={book.price} /> &nbsp;&nbsp;
-            <BookCopies no_of_copies={book.available_copies} />
+            <BookCopies no_of_copies={availableCopiesOfBook} />
           </Flex>
-          {book.available_copies > 0 ? (
+          {availableCopiesOfBook > 0 ? (
             <AllBookItemAddToCart
               book_id={book.id}
-              book_copies={book.available_copies}
+              book_copies={availableCopiesOfBook}
               book_price={book.price}
             />
           ) : null}
