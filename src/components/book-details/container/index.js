@@ -1,19 +1,19 @@
-import React from "react";
-import styled from "styled-components";
-import { Container } from "../../../styles/common";
-import BookDetailsSidebar from "./sidebar";
-import BackButton from "../../common/button/back";
-import { useBookAvailableCopies } from "../../../helpers/book/availableCopies";
-import BookDetailsOverview from "./overview";
-import BookDetailsFullDescription from "./full-description";
-import BookDetailsHeader from "./header";
+import React from "react"
+import styled from "styled-components"
+import { Container } from "../../../styles/common"
+import BookDetailsSidebar from "./sidebar"
+import BackButton from "../../common/button/back"
+import { useBookAvailableCopies } from "../../../helpers/book/availableCopies"
+import BookDetailsOverview from "./overview"
+import BookDetailsFullDescription from "./full-description"
+import BookDetailsHeader from "./header"
 
 const BookContainer = ({ book }) => {
-  const availableCopiesOfBook = useBookAvailableCopies(book);
+  const availableCopiesOfBook = useBookAvailableCopies(book)
   return (
     <Container boxed>
       <SubHeading>
-        <BackButton url="/" />
+        <BackButton url='/' />
       </SubHeading>
       <Section>
         <BookDetailsSidebar
@@ -25,7 +25,7 @@ const BookContainer = ({ book }) => {
         <Details>
           <BookDetailsHeader
             title={book.title}
-            publisher={book.published_at}
+            published_at={book.published_at}
             authors={book.authors}
           />
 
@@ -35,10 +35,10 @@ const BookContainer = ({ book }) => {
         </Details>
       </Section>
     </Container>
-  );
-};
+  )
+}
 
-export default BookContainer;
+export default BookContainer
 
 const Section = styled.section`
   display: flex;
@@ -47,7 +47,7 @@ const Section = styled.section`
   @media screen and (max-width: 768px) {
     flex-direction: column;
   }
-`;
+`
 
 const Details = styled.section`
   flex-grow: 1;
@@ -56,8 +56,8 @@ const Details = styled.section`
   @media screen and (max-width: 768px) {
     margin-left: 0px;
   }
-`;
+`
 
 const SubHeading = styled.div`
   margin-top: 36px;
-`;
+`
