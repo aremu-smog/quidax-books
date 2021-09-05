@@ -1,13 +1,12 @@
 import React from "react";
 import styled from "styled-components";
-import { BookTitle, BookMeta, BookAuthors } from "../../common/book";
 import { Container } from "../../../styles/common";
 import BookDetailsSidebar from "./sidebar";
 import BackButton from "../../common/button/back";
-import { formatDate } from "../../../helpers/date";
 import { useBookAvailableCopies } from "../../../helpers/book/availableCopies";
 import BookDetailsOverview from "./overview";
 import BookDetailsFullDescription from "./full-description";
+import BookDetailsHeader from "./header";
 
 const Section = styled.section`
   display: flex;
@@ -46,11 +45,10 @@ const BookContainer = ({ book }) => {
           available_copies={availableCopiesOfBook}
         />
         <Details>
-          <BookTitle name={book.title} large />
-
-          <BookMeta
-            title={<BookAuthors authors={book.authors} />}
-            value={formatDate(book.published_at, "yearOnly")}
+          <BookDetailsHeader
+            title={book.title}
+            publisher={book.published_at}
+            authors={book.authors}
           />
 
           <BookDetailsOverview book={book} />
