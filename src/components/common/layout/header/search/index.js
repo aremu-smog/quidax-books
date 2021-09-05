@@ -4,6 +4,16 @@ import { ArrowIcon, CloseIcon, SearchIcon } from "../../../../../icons";
 import { qbOutlineGray, qbGray } from "../../../../../styles/colors";
 import { HideOnPc } from "../../../../../styles/common";
 
+import { useReactiveVar } from "@apollo/client";
+import {
+  searchVar,
+  startSearchProgress,
+  stopSearchProgress,
+  updateSearchValue,
+} from "../../../../../hooks/search";
+
+import { useHistory } from "react-router-dom";
+
 const Wrapper = styled.div`
   max-width: 600px;
   display: flex;
@@ -41,24 +51,29 @@ const StyledSubmit = styled.button`
   background-color: ${qbGray};
 `;
 const Search = () => {
-  const [isSearching, setIsSearching] = useState(false);
+  const { value, inProgress } = useReactiveVar(searchVar);
   const [isOpenOnMobile, setIsOpenOnMobile] = useState(false);
-  const [searchTerm, setSearchTerm] = useState("");
+
+  const history = useHistory();
 
   const openSearchOnMobile = () => setIsOpenOnMobile(true);
   const closeSearchOnMobile = () => setIsOpenOnMobile(false);
 
-  const startSearching = () => {
-    if (searchTerm !== "") {
-      setIsSearching(true);
-    } else {
-      stopSearching();
+  const startSearching = (e) => {
+    if (value === "" && !inProgress) {
+      startSearchProgress();
+      history.push("/search");
     }
+
+    updateSearchValue(e.target.value);
   };
+
   const stopSearching = () => {
-    setSearchTerm("");
-    setIsSearching(false);
+    stopSearchProgress();
+    history.goBack();
+    updateSearchValue("");
   };
+
   return (
     <>
       <HideOnPc display="block">
@@ -75,12 +90,12 @@ const Search = () => {
         </HideOnPc>
         <StyledInput
           placeholder="Search books, genres, authors, etc."
-          onKeyUp={startSearching}
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
+          value={value}
+          onChange={startSearching}
+          autoFocus={inProgress}
         />
-        <StyledSubmit onClick={isSearching ? stopSearching : null}>
-          {isSearching ? <CloseIcon /> : <SearchIcon />}
+        <StyledSubmit onClick={stopSearching}>
+          {inProgress ? <CloseIcon /> : <SearchIcon />}
         </StyledSubmit>
       </Wrapper>
     </>

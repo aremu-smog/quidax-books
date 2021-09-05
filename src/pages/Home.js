@@ -2,6 +2,7 @@ import React from "react";
 import Layout from "../components/common/layout";
 import { useQuery, gql } from "@apollo/client";
 import { AllBooks, FeaturedBooks } from "../components/home";
+import Heading from "../components/common/heading";
 
 const ALL_BOOKS_QUERY = gql`
   query {
@@ -44,6 +45,8 @@ const HomePage = () => {
   return (
     <Layout>
       <FeaturedBooks books={books} />
+
+      <Heading text="All Books" />
       <AllBooks books={books} />
     </Layout>
   );

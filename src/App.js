@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { BookDetailsPage, HomePage } from "./pages";
+import { BookDetailsPage, HomePage, SearchPage } from "./pages";
 import GlobalStyle from "./styles/globalStyles";
 import { ApolloClient, ApolloProvider } from "@apollo/client";
 
@@ -17,6 +17,7 @@ function App() {
 
         <Switch>
           <Route exact path="/" component={HomePage} />
+          <Route path="/search" component={SearchPage} />
           <Route path="/book-details/:id" component={BookDetailsPage} />
         </Switch>
       </ApolloProvider>

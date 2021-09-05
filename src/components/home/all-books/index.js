@@ -1,8 +1,8 @@
-import React from "react"
-import Heading from "../../common/heading"
-import styled from "styled-components"
-import AllBookItem from "./item"
-import { Container } from "../../../styles/common"
+import React from "react";
+import Heading from "../../common/heading";
+import styled from "styled-components";
+import AllBookItem from "./item";
+import { Container } from "../../../styles/common";
 
 const Grid = styled.section`
   display: grid;
@@ -16,21 +16,19 @@ const Grid = styled.section`
   @media screen and (max-width: 768px) {
     grid-template-columns: auto;
   }
-`
+`;
 
 const AllBooks = ({ books }) => {
-  const showBooks = books.map(book => {
-    return <AllBookItem book={book} key={book.id} />
-  })
+  const showBooks = books.map((book) => {
+    return <AllBookItem book={book} key={book.id} />;
+  });
   return (
     <>
-      <Heading text='All Books' />
-
       <Container>
         <Grid>{showBooks}</Grid>
       </Container>
     </>
-  )
-}
+  );
+};
 
-export default AllBooks
+export default AllBooks;
