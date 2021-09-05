@@ -19,6 +19,7 @@ const BookContainer = ({ book }) => {
         <BookDetailsSidebar
           id={book.id}
           image_url={book.image_url}
+          copies={book.available_copies}
           price={book.price}
           available_copies={availableCopiesOfBook}
         />

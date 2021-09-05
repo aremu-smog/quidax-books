@@ -43,7 +43,7 @@ const BookGridItem = ({ book }) => {
           {availableCopiesOfBook > 0 ? (
             <BookGridItemAddToCart
               book_id={book.id}
-              book_copies={availableCopiesOfBook}
+              book_copies={book.available_copies}
               book_price={book.price}
             />
           ) : null}

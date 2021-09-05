@@ -6,7 +6,7 @@ import BookCopies from "../../common/book/copies"
 import BookPrice from "../../common/book/price"
 import { addItemToCart } from "../../../helpers/cart"
 
-const BookDetailsAddToCart = ({ copies, price, id }) => {
+const BookDetailsAddToCart = ({ copies, availableCopies, price, id }) => {
   return (
     <AddToCart>
       <Button
@@ -17,7 +17,7 @@ const BookDetailsAddToCart = ({ copies, price, id }) => {
               <CartButtonContentMobile>
                 <div>
                   <p className='text'> Add to Cart</p>
-                  <BookCopies no_of_copies={copies} />
+                  <BookCopies no_of_copies={availableCopies} />
                 </div>
                 <BookPrice amount={price} medium />
               </CartButtonContentMobile>
