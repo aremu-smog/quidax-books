@@ -26,6 +26,7 @@ const FeaturedBooksSlider = ({ books = [] }) => {
       navigation
       pagination={{ clickable: true }}
       spaceBetween={0}
+      loop={true}
       slidesPerView={2.4}
       breakpoints={{
         568: {
