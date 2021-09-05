@@ -4,8 +4,9 @@ import Button from "../common/button"
 import CartHeader from "./header"
 import CartItem from "./item"
 import { useReactiveVar } from "@apollo/client"
-import { cartContainerVar, cartItemsVar, closeCart } from "./cache"
+// import { cartContainerVar, cartItemsVar, closeCart } from "./cache"
 import CartSubTotal from "./subtotal"
+import { cartVar, closeCart } from "../../helpers/cart"
 
 const Wrapper = styled.div`
   width: 100%;
@@ -34,24 +35,25 @@ const CartContainer = styled.section`
 `
 
 const Cart = () => {
-  const cartContainer = useReactiveVar(cartContainerVar)
-  const cartItems = useReactiveVar(cartItemsVar)
+  const { isOpen: cartIsOpen, items: cartItems } = useReactiveVar(cartVar)
+  // const cartContainer = useReactiveVar(cartContainerVar)
+  // const cartItems = useReactiveVar(cartItemsVar)
 
   const cartArea = useRef()
   useEffect(() => {
     const handleClickOutside = e => {
       if (cartArea.current && !cartArea.current.contains(e.target)) {
-        cartContainer[0].isOpen && closeCart()
+        cartIsOpen && closeCart()
       }
     }
     document.addEventListener("mousedown", handleClickOutside)
     return () => {
       document.removeEventListener("mousedown", handleClickOutside)
     }
-  }, [cartContainer])
+  }, [cartIsOpen])
 
   return (
-    <Wrapper isOpen={cartContainer[0].isOpen}>
+    <Wrapper isOpen={cartIsOpen}>
       <CartContainer ref={cartArea}>
         <CartHeader />
         <CartItems>

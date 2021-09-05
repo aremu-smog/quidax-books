@@ -1,8 +1,8 @@
 import { useReactiveVar } from "@apollo/client"
-import { cartItemsVar } from "../../components/cart/cache"
+import { cartVar } from "../cart"
 
 export const useBookAvailableCopies = book => {
-  const cartItems = useReactiveVar(cartItemsVar)
+  const { items: cartItems } = useReactiveVar(cartVar)
 
   const itemInCart = cartItems.filter(item => item.id === book.id)
   const availableCopiesOfBook =

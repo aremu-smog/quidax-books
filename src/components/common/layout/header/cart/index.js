@@ -1,9 +1,10 @@
-import React from "react";
-import styled from "styled-components";
-import { qbGreen } from "../../../../../styles/colors";
-import { CartIcon } from "../../../../../icons";
-import { cartItemsVar, openCart } from "../../../../cart/cache";
-import { useReactiveVar } from "@apollo/client";
+import React from "react"
+import styled from "styled-components"
+import { qbGreen } from "../../../../../styles/colors"
+import { CartIcon } from "../../../../../icons"
+// import { cartItemsVar, openCart } from "../../../../cart/cache";
+import { useReactiveVar } from "@apollo/client"
+import { cartVar, openCart } from "../../../../../helpers/cart"
 
 const Button = styled.button`
   position: relative;
@@ -14,7 +15,7 @@ const Button = styled.button`
   @media screen and (max-width: 568px) {
     margin-left: 10px;
   }
-`;
+`
 const Counter = styled.span`
   display: block;
   position: absolute;
@@ -29,15 +30,16 @@ const Counter = styled.span`
   text-align: center;
   line-height: 1.65;
   background-color: ${qbGreen};
-`;
+`
 const CartButton = () => {
-  const cartItems = useReactiveVar(cartItemsVar);
+  const { items: cartItems } = useReactiveVar(cartVar)
+  // const cartItems = useReactiveVar(cartItemsVar);
   return (
     <Button onClick={() => openCart()}>
       <Counter>{cartItems.length}</Counter>
       <CartIcon />
     </Button>
-  );
-};
+  )
+}
 
-export default CartButton;
+export default CartButton

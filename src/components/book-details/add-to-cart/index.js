@@ -1,10 +1,36 @@
-import React from "react";
-import styled from "styled-components";
-import Button from "../../common/button";
-import { HideOnPc, HideOnMobile } from "../../../styles/common";
-import BookCopies from "../../common/book/copies";
-import BookPrice from "../../common/book/price";
-import { addItemToCart } from "../../cart/cache";
+import React from "react"
+import styled from "styled-components"
+import Button from "../../common/button"
+import { HideOnPc, HideOnMobile } from "../../../styles/common"
+import BookCopies from "../../common/book/copies"
+import BookPrice from "../../common/book/price"
+import { addItemToCart } from "../../../helpers/cart"
+
+const BookDetailsAddToCart = ({ copies, price, id }) => {
+  return (
+    <AddToCart>
+      <Button
+        action={() => addItemToCart(id, copies, price)}
+        text={
+          <>
+            <HideOnPc display='block'>
+              <CartButtonContentMobile>
+                <div>
+                  <p className='text'> Add to Cart</p>
+                  <BookCopies no_of_copies={copies} />
+                </div>
+                <BookPrice amount={price} medium />
+              </CartButtonContentMobile>
+            </HideOnPc>
+            <HideOnMobile>Add to Cart</HideOnMobile>
+          </>
+        }
+      />
+    </AddToCart>
+  )
+}
+
+export default BookDetailsAddToCart
 
 const AddToCart = styled.div`
   @media screen and (max-width: 568px) {
@@ -14,7 +40,7 @@ const AddToCart = styled.div`
     left: 0;
     bottom: 0;
   }
-`;
+`
 
 const CartButtonContentMobile = styled.div`
   display: flex;
@@ -31,30 +57,4 @@ const CartButtonContentMobile = styled.div`
     font-weight: bold;
     margin-bottom: 2px;
   }
-`;
-
-const BookDetailsAddToCart = ({ copies, price, id }) => {
-  return (
-    <AddToCart>
-      <Button
-        action={() => addItemToCart(id, copies, price)}
-        text={
-          <>
-            <HideOnPc display="block">
-              <CartButtonContentMobile>
-                <div>
-                  <p className="text"> Add to Cart</p>
-                  <BookCopies no_of_copies={copies} />
-                </div>
-                <BookPrice amount={price} medium />
-              </CartButtonContentMobile>
-            </HideOnPc>
-            <HideOnMobile>Add to Cart</HideOnMobile>
-          </>
-        }
-      />
-    </AddToCart>
-  );
-};
-
-export default BookDetailsAddToCart;
+`

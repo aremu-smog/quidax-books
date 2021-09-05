@@ -1,10 +1,10 @@
-import React from "react";
-import styled from "styled-components";
-import { useReactiveVar } from "@apollo/client";
-import { subTotalVar } from "../cache";
+import React from "react"
+import styled from "styled-components"
+
+import { useCartSubtotal } from "../../../helpers/cart/getSubtotal"
 
 const CartSubTotal = () => {
-  const subTotal = useReactiveVar(subTotalVar);
+  const subTotal = useCartSubtotal()
 
   const SubTotalWrapper = styled.section`
     display: flex;
@@ -12,17 +12,17 @@ const CartSubTotal = () => {
     align-items: baseline;
     margin-top: 48px;
     margin-bottom: 18px;
-  `;
+  `
 
   const SubTotalText = styled.p`
     font-size: 14px;
     margin: 0px;
-  `;
+  `
 
   const SubTotalValue = styled.p`
     font-size: 36px;
     margin: 0px;
-  `;
+  `
 
   return (
     <SubTotalWrapper>
@@ -30,7 +30,7 @@ const CartSubTotal = () => {
 
       <SubTotalValue>$ {subTotal.toLocaleString()}</SubTotalValue>
     </SubTotalWrapper>
-  );
-};
+  )
+}
 
-export default CartSubTotal;
+export default CartSubTotal

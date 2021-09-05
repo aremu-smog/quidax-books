@@ -1,10 +1,10 @@
-import React from "react";
-import styled from "styled-components";
-import { qbOutlineGray } from "../../../styles/colors";
-import { BookTitle, BookPrice, BookAuthors } from "../../common/book/";
-import RemoveFromCart from "./remove";
-import { increaseQuantity, decreaseQuantity } from "../cache";
-import { gql, useQuery } from "@apollo/client";
+import React from "react"
+import styled from "styled-components"
+import { qbOutlineGray } from "../../../styles/colors"
+import { BookTitle, BookPrice, BookAuthors } from "../../common/book/"
+import RemoveFromCart from "./remove"
+import { gql, useQuery } from "@apollo/client"
+import { increaseQuantity, decreaseQuantity } from "../../../helpers/cart"
 
 const Wrapper = styled.div`
   display: flex;
@@ -12,7 +12,7 @@ const Wrapper = styled.div`
   border-bottom: 1px solid ${qbOutlineGray};
   font-size: 12px;
   justify-content: space-between;
-`;
+`
 
 const Img = styled.img`
   width: 60px;
@@ -22,19 +22,19 @@ const Img = styled.img`
   display: block;
   margin-right: 15px;
   box-shadow: 0px 10px 30px 0px #0000001a;
-`;
+`
 const Meta = styled.div`
   display: flex;
   width: 100%;
   flex-direction: column;
   justify-content: space-between;
-`;
+`
 
 const PriceQuantity = styled.div`
   width: 96px;
   text-align: right;
   font-size: 14px;
-`;
+`
 
 const QuantityToggleWrapper = styled.section`
   display: inline-flex;
@@ -53,10 +53,10 @@ const QuantityToggleWrapper = styled.section`
     padding: 6px 0px;
     border: 1px solid ${qbOutlineGray};
   }
-`;
+`
 const SubTotal = styled.p`
   font-weight: bold;
-`;
+`
 
 const GET_BOOK_IN_CART = gql`
   query BookInCart($cartItemId: String) {
@@ -70,25 +70,25 @@ const GET_BOOK_IN_CART = gql`
       available_copies
     }
   }
-`;
-const CartItem = ({ cartItem, setSubTotal }) => {
+`
+const CartItem = ({ cartItem }) => {
   // alert(book_id);
 
-  const cartItemId = cartItem.id;
-  const cartItemQuantity = cartItem.quantity;
+  const cartItemId = cartItem.id
+  const cartItemQuantity = cartItem.quantity
   const { loading, error, data } = useQuery(GET_BOOK_IN_CART, {
-    variables: { cartItemId },
-  });
+    variables: { cartItemId }
+  })
 
   if (loading) {
-    return "...";
+    return "..."
   }
 
   if (error) {
-    return ".../";
+    return ".../"
   }
 
-  const book = data.books[0];
+  const book = data.books[0]
 
   return (
     <Wrapper>
@@ -106,18 +106,14 @@ const CartItem = ({ cartItem, setSubTotal }) => {
         <QuantityToggleWrapper>
           <button onClick={() => decreaseQuantity(cartItem)}>-</button>
           <div>{cartItemQuantity}</div>
-          <button
-            onClick={() => increaseQuantity(cartItem, book.available_copies)}
-          >
-            +
-          </button>
+          <button onClick={() => increaseQuantity(cartItem, book.available_copies)}>+</button>
         </QuantityToggleWrapper>
         <SubTotal>
           <BookPrice amount={book.price * cartItemQuantity} />
         </SubTotal>
       </PriceQuantity>
     </Wrapper>
-  );
-};
+  )
+}
 
-export default CartItem;
+export default CartItem
