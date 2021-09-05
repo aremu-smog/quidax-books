@@ -1,11 +1,11 @@
-import styled from "styled-components";
+import styled from "styled-components"
 
 const Icon = styled.svg`
   display: block;
-  marginb-bottom: 0px;
+  margin-bottom: 0px;
   path {
-    fill: ${(props) => (props.isLight ? "white" : "black")};
+    fill: ${props => (props.isLight ? "white" : "black")};
   }
-`;
+`
 
-export default Icon;
+export default Icon

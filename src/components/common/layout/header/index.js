@@ -1,10 +1,29 @@
-import React from "react";
-import styled from "styled-components";
-import { BrandIcon } from "../../../../icons";
-import { Container } from "../../../../styles/common";
-import CartButton from "./cart";
-import QuidaxBookLogo from "./logo";
-import Search from "./search";
+import React from "react"
+import styled from "styled-components"
+import { BrandIcon } from "../../../../icons"
+import { Container } from "../../../../styles/common"
+import CartButton from "./cart"
+import QuidaxBookLogo from "./logo"
+import Search from "./search"
+
+const MainHeader = () => {
+  return (
+    <Header>
+      <Container>
+        <QuidaxBookLogo />
+
+        <Search />
+
+        <div className='flex flex-vertical-center'>
+          <BrandIcon />
+          <CartButton />
+        </div>
+      </Container>
+    </Header>
+  )
+}
+
+export default MainHeader
 
 export const Header = styled.header`
   height: 100px;
@@ -21,22 +40,4 @@ export const Header = styled.header`
   @media screen and (max-width: 568px) {
     height: 70px;
   }
-`;
-const MainHeader = () => {
-  return (
-    <Header>
-      <Container>
-        <QuidaxBookLogo />
-
-        <Search />
-
-        <div className="flex flex-vertical-center">
-          <BrandIcon />
-          <CartButton />
-        </div>
-      </Container>
-    </Header>
-  );
-};
-
-export default MainHeader;
+`

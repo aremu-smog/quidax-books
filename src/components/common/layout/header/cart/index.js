@@ -2,9 +2,21 @@ import React from "react"
 import styled from "styled-components"
 import { qbGreen } from "../../../../../styles/colors"
 import { CartIcon } from "../../../../../icons"
-// import { cartItemsVar, openCart } from "../../../../cart/cache";
 import { useReactiveVar } from "@apollo/client"
 import { cartVar, openCart } from "../../../../../helpers/cart"
+
+const CartButton = () => {
+  const { items: cartItems } = useReactiveVar(cartVar)
+
+  return (
+    <Button onClick={() => openCart()}>
+      <Counter>{cartItems.length}</Counter>
+      <CartIcon />
+    </Button>
+  )
+}
+
+export default CartButton
 
 const Button = styled.button`
   position: relative;
@@ -31,15 +43,3 @@ const Counter = styled.span`
   line-height: 1.65;
   background-color: ${qbGreen};
 `
-const CartButton = () => {
-  const { items: cartItems } = useReactiveVar(cartVar)
-  // const cartItems = useReactiveVar(cartItemsVar);
-  return (
-    <Button onClick={() => openCart()}>
-      <Counter>{cartItems.length}</Counter>
-      <CartIcon />
-    </Button>
-  )
-}
-
-export default CartButton

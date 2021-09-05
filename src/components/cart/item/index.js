@@ -6,6 +6,64 @@ import RemoveFromCart from "./remove"
 import { gql, useQuery } from "@apollo/client"
 import { increaseQuantity, decreaseQuantity } from "../../../helpers/cart"
 
+const GET_BOOK_IN_CART = gql`
+  query BookInCart($cartItemId: String) {
+    books(where: { id: $cartItemId }) {
+      title
+      image_url
+      authors {
+        name
+      }
+      price
+      available_copies
+    }
+  }
+`
+const CartItem = ({ cartItem }) => {
+  const cartItemId = cartItem.id
+  const cartItemQuantity = cartItem.quantity
+  const { loading, error, data } = useQuery(GET_BOOK_IN_CART, {
+    variables: { cartItemId }
+  })
+
+  if (loading) {
+    return "..."
+  }
+
+  if (error) {
+    return ".../"
+  }
+
+  const book = data.books[0]
+
+  return (
+    <Wrapper>
+      <Img src={book.image_url} />
+      <Meta>
+        <div>
+          <BookTitle name={book.title} />
+          <BookAuthors authors={book.authors} />
+        </div>
+
+        <RemoveFromCart cartItem={cartItem} />
+      </Meta>
+      <PriceQuantity>
+        <BookPrice amount={book.price} />
+        <QuantityToggleWrapper>
+          <button onClick={() => decreaseQuantity(cartItem)}>-</button>
+          <div>{cartItemQuantity}</div>
+          <button onClick={() => increaseQuantity(cartItem, book.available_copies)}>+</button>
+        </QuantityToggleWrapper>
+        <SubTotal>
+          <BookPrice amount={book.price * cartItemQuantity} />
+        </SubTotal>
+      </PriceQuantity>
+    </Wrapper>
+  )
+}
+
+export default CartItem
+
 const Wrapper = styled.div`
   display: flex;
   padding: 24px 0px;
@@ -57,63 +115,3 @@ const QuantityToggleWrapper = styled.section`
 const SubTotal = styled.p`
   font-weight: bold;
 `
-
-const GET_BOOK_IN_CART = gql`
-  query BookInCart($cartItemId: String) {
-    books(where: { id: $cartItemId }) {
-      title
-      image_url
-      authors {
-        name
-      }
-      price
-      available_copies
-    }
-  }
-`
-const CartItem = ({ cartItem }) => {
-  // alert(book_id);
-
-  const cartItemId = cartItem.id
-  const cartItemQuantity = cartItem.quantity
-  const { loading, error, data } = useQuery(GET_BOOK_IN_CART, {
-    variables: { cartItemId }
-  })
-
-  if (loading) {
-    return "..."
-  }
-
-  if (error) {
-    return ".../"
-  }
-
-  const book = data.books[0]
-
-  return (
-    <Wrapper>
-      <Img src={book.image_url} />
-      <Meta>
-        <div>
-          <BookTitle name={book.title} />
-          <BookAuthors authors={book.authors} />
-        </div>
-
-        <RemoveFromCart cartItem={cartItem} />
-      </Meta>
-      <PriceQuantity>
-        <BookPrice amount={book.price} />
-        <QuantityToggleWrapper>
-          <button onClick={() => decreaseQuantity(cartItem)}>-</button>
-          <div>{cartItemQuantity}</div>
-          <button onClick={() => increaseQuantity(cartItem, book.available_copies)}>+</button>
-        </QuantityToggleWrapper>
-        <SubTotal>
-          <BookPrice amount={book.price * cartItemQuantity} />
-        </SubTotal>
-      </PriceQuantity>
-    </Wrapper>
-  )
-}
-
-export default CartItem

@@ -6,10 +6,6 @@ import { Header } from "../../common/layout/header"
 
 import YourCart from "./your-cart"
 
-const Container = styled.section`
-  padding: 0px 30px;
-  width: 100%;
-`
 const CartHeader = () => {
   return (
     <Header>
@@ -21,6 +17,9 @@ const CartHeader = () => {
   )
 }
 
-CartHeader.propTypes = {}
-
 export default CartHeader
+
+const Container = styled.section`
+  padding: 0px 30px;
+  width: 100%;
+`

@@ -1,17 +1,8 @@
-import React from "react";
-import styled from "styled-components";
-import BookMeta from "../meta";
-import Stars from "./stars";
+import React from "react"
+import styled from "styled-components"
+import BookMeta from "../meta"
+import Stars from "./stars"
 
-const Rating = styled.div`
-  p {
-    margin-top: 0px;
-    margin-bottom: 4px;
-  }
-  div {
-    margin-bottom: 0px;
-  }
-`;
 const BookRating = ({ no }) => {
   return (
     <Rating>
@@ -24,7 +15,17 @@ const BookRating = ({ no }) => {
         value={<Stars no={no} />}
       />
     </Rating>
-  );
-};
+  )
+}
 
-export default BookRating;
+export default BookRating
+
+const Rating = styled.div`
+  p {
+    margin-top: 0px;
+    margin-bottom: 4px;
+  }
+  div {
+    margin-bottom: 0px;
+  }
+`

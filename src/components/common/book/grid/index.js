@@ -1,11 +1,11 @@
-import React from "react";
-import styled from "styled-components";
-import BookGridItem from "./item";
+import React from "react"
+import styled from "styled-components"
+import BookGridItem from "./item"
 
 const BookGrid = ({ books }) => {
-  const showBooks = books.map((book) => {
-    return <BookGridItem book={book} key={book.id} />;
-  });
+  const showBooks = books.map(book => {
+    return <BookGridItem book={book} key={book.id} />
+  })
 
   const Grid = styled.section`
     display: grid;
@@ -19,9 +19,9 @@ const BookGrid = ({ books }) => {
     @media screen and (max-width: 768px) {
       grid-template-columns: auto;
     }
-  `;
+  `
 
-  return <Grid>{showBooks}</Grid>;
-};
+  return <Grid>{showBooks}</Grid>
+}
 
-export default BookGrid;
+export default BookGrid

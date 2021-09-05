@@ -1,90 +1,54 @@
-import React, { useEffect, useState } from "react";
-import styled from "styled-components";
-import { ArrowIcon, CloseIcon, SearchIcon } from "../../../../../icons";
-import { qbOutlineGray, qbGray } from "../../../../../styles/colors";
-import { HideOnPc } from "../../../../../styles/common";
+import React, { useEffect, useState } from "react"
+import styled from "styled-components"
+import { ArrowIcon, CloseIcon, SearchIcon } from "../../../../../icons"
+import { qbOutlineGray, qbGray } from "../../../../../styles/colors"
+import { HideOnPc } from "../../../../../styles/common"
 
-import { useReactiveVar } from "@apollo/client";
+import { useReactiveVar } from "@apollo/client"
 import {
   searchVar,
   startSearchProgress,
   stopSearchProgress,
-  updateSearchValue,
-} from "../../../../../helpers/search";
+  updateSearchValue
+} from "../../../../../helpers/search"
 
-import { useHistory, useLocation } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom"
 
-const Wrapper = styled.div`
-  max-width: 600px;
-  display: flex;
-  width: 100%;
-  padding: 0 30px;
-  background-color: white;
-  @media screen and (max-width: 568px) {
-    display: ${(props) => (props.isOpenOnMobile ? "flex" : "none")};
-
-    height: 70px;
-    position: absolute;
-    left: 0;
-    z-index: 150;
-    align-items: center;
-  }
-`;
-
-const StyledInput = styled.input`
-  width: 100%;
-  height: 40px;
-  border: 1px solid ${qbOutlineGray};
-  padding: 0px 18px;
-  &:focus {
-    outline: none;
-  }
-  @media screen and (max-width: 568px) {
-    margin-left: 16px;
-  }
-`;
-const StyledSubmit = styled.button`
-  width: 40px;
-  height: 40px;
-  border: 1px solid ${qbOutlineGray};
-  border-left: none;
-  background-color: ${qbGray};
-`;
 const Search = () => {
-  const { value: searchValue, inProgress } = useReactiveVar(searchVar);
-  const [isOpenOnMobile, setIsOpenOnMobile] = useState(false);
+  const { value: searchValue, inProgress } = useReactiveVar(searchVar)
+  const [isOpenOnMobile, setIsOpenOnMobile] = useState(false)
 
-  const history = useHistory();
-  const location = useLocation();
+  const history = useHistory()
+  const location = useLocation()
 
   useEffect(() => {
     if (location.pathname !== "/search") {
-      updateSearchValue("");
-      stopSearchProgress();
+      updateSearchValue("")
+      stopSearchProgress()
     }
-  }, [location.pathname]);
+  }, [location.pathname])
 
-  const openSearchOnMobile = () => setIsOpenOnMobile(true);
-  const closeSearchOnMobile = () => setIsOpenOnMobile(false);
+  const openSearchOnMobile = () => setIsOpenOnMobile(true)
+  const closeSearchOnMobile = () => setIsOpenOnMobile(false)
 
-  const startSearching = (e) => {
+  const startSearching = e => {
     if (searchValue === "" && !inProgress) {
-      startSearchProgress();
-      history.push("/search");
+      startSearchProgress()
+      history.push("/search")
     }
 
-    updateSearchValue(e.target.value);
-  };
+    updateSearchValue(e.target.value)
+  }
 
   const stopSearching = () => {
-    stopSearchProgress();
-    history.goBack();
-    updateSearchValue("");
-  };
+    stopSearchProgress()
+    history.goBack()
+    updateSearchValue("")
+  }
 
   return (
     <>
-      <HideOnPc display="block">
+      <HideOnPc display='block'>
         <button onClick={openSearchOnMobile}>
           <SearchIcon />
         </button>
@@ -97,7 +61,7 @@ const Search = () => {
           </button>
         </HideOnPc>
         <StyledInput
-          placeholder="Search books, genres, authors, etc."
+          placeholder='Search books, genres, authors, etc.'
           value={searchValue}
           onChange={startSearching}
           autoFocus={inProgress}
@@ -107,7 +71,44 @@ const Search = () => {
         </StyledSubmit>
       </Wrapper>
     </>
-  );
-};
+  )
+}
 
-export default Search;
+export default Search
+
+const Wrapper = styled.div`
+  max-width: 600px;
+  display: flex;
+  width: 100%;
+  padding: 0 30px;
+  background-color: white;
+  @media screen and (max-width: 568px) {
+    display: ${props => (props.isOpenOnMobile ? "flex" : "none")};
+
+    height: 70px;
+    position: absolute;
+    left: 0;
+    z-index: 150;
+    align-items: center;
+  }
+`
+
+const StyledInput = styled.input`
+  width: 100%;
+  height: 40px;
+  border: 1px solid ${qbOutlineGray};
+  padding: 0px 18px;
+  &:focus {
+    outline: none;
+  }
+  @media screen and (max-width: 568px) {
+    margin-left: 16px;
+  }
+`
+const StyledSubmit = styled.button`
+  width: 40px;
+  height: 40px;
+  border: 1px solid ${qbOutlineGray};
+  border-left: none;
+  background-color: ${qbGray};
+`

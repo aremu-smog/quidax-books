@@ -1,18 +1,28 @@
-import React from "react";
-import styled, { css } from "styled-components";
+import React from "react"
+import styled, { css } from "styled-components"
+
+const BookTitle = ({ name, featured, large }) => {
+  return (
+    <P isFeatured={featured} isLarge={large}>
+      {name}
+    </P>
+  )
+}
+
+export default BookTitle
 
 const P = styled.p`
   margin-bottom: 0px;
   font-weight: bold;
   font-size: 14px;
   margin-top: 0;
-  ${(props) =>
+  ${props =>
     props.isFeatured &&
     css`
       font-size: 18px;
       color: white;
     `}
-  ${(props) =>
+  ${props =>
     props.isLarge &&
     css`
       font-size: 36px;
@@ -22,14 +32,4 @@ const P = styled.p`
         font-size: 28px;
       }
     `}
-`;
-
-const BookTitle = ({ name, featured, large }) => {
-  return (
-    <P isFeatured={featured} isLarge={large}>
-      {name}
-    </P>
-  );
-};
-
-export default BookTitle;
+`

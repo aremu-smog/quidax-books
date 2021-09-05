@@ -1,14 +1,14 @@
-import React from "react";
+import React from "react"
 
 const MetaList = ({ items, isFeatured }) => {
-  let names;
+  let names
   if (isFeatured) {
-    names = items.filter((_, index) => index < 2).map((item) => item.name);
+    names = items.filter((_, index) => index < 2).map(item => item.name)
   } else {
-    names = items.map((item) => item.name);
+    names = items.map(item => item.name)
   }
 
-  return <>{names.join(", ")}</>;
-};
+  return <>{names.join(", ")}</>
+}
 
-export default MetaList;
+export default MetaList
