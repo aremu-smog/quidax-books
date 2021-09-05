@@ -1,5 +1,17 @@
 # Installation and Setup
-Seeing this README means you have have successfully unzipped this file so I will skip. The next step is to
+
+### Clone this repo
+
+```
+git clone https://github.com/aremu-smog/quidax-books.git
+```
+
+### Move into the project directory
+
+```
+cd quidax-books
+```
+
 ### Install Packages
 ```
 npm install
@@ -9,20 +21,18 @@ npm install
 ```
 npm start
 ```
-The app will run in your browser at ```localhost:3000```
+The app will run in your browser at ```http://localhost:3000```
 
 
 # Assumptions
 ### Styling (css-in-js)
-Since the assessment stated that no css framework should be used. I chose to use styled-components allows ease use of css-in-js approach of working in React
+Since the assessment stated that no css framework should be used. I chose to use styled-components a css-in-js framework which makes it flexible to work in React. It does not have any predefined styles or components as bootstrap, semantic UI, chakra UI
 
 
 # Issues Faced
-- State Managment : I initially used Context API which worked pretty well but the app was very slow so I thought to use apollo-client (bad idea) - testing new waters in a time bound project like this probably not the best option so I ended up having to rewrite the functionalities I had written in Context while learning 
+**Search**: The expected fields to for the search query do not have @search directive so the workaround I came with was to filter the books coming in from the server by concatenating the fields (array fields where converted into a string) and test with REGEX
 
-### Things that don't work
-- Clicking the cart button doesn't show the cart section: Add to cart on single page or all cart does work fine
-- Increasing and decreasing quantity of cart Item
+
 
 # Feedback
-This is a true test I must say. This enabled me to see gaps I need to fill. Even if I don't get this role, I am glad to have done this.
+None for now
