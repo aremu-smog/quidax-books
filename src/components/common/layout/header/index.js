@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
-import { BrandIcon, SearchIcon } from "../../../../icons";
-import { Container, HideOnPc } from "../../../../styles/common";
+import { BrandIcon } from "../../../../icons";
+import { Container } from "../../../../styles/common";
 import CartButton from "./cart";
 import QuidaxBookLogo from "./logo";
 import Search from "./search";

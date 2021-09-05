@@ -1,20 +1,18 @@
-import React, { useState, useEffect } from "react"
-import styled from "styled-components"
+import React from "react";
+import styled from "styled-components";
 import {
   BookTitle,
   BookPurchasesLikesAndRating,
   BookMeta,
   BookCopies,
   BookPrice,
-  BookAuthors
-} from "../../../common/book/"
-import { Link } from "react-router-dom"
-import { formatDate } from "../../../../helpers/date"
-import { useReactiveVar } from "@apollo/client"
-import { cartItemsVar } from "../../../cart/cache"
+  BookAuthors,
+} from "../../../common/book/";
+import { Link } from "react-router-dom";
+import { formatDate } from "../../../../helpers/date";
 
-import AllBookItemAddToCart from "./add-to-cart"
-import { useBookAvailableCopies } from "../../../../helpers/book/availableCopies"
+import AllBookItemAddToCart from "./add-to-cart";
+import { useBookAvailableCopies } from "../../../../helpers/book/availableCopies";
 
 const Section = styled.section`
   display: flex;
@@ -23,32 +21,32 @@ const Section = styled.section`
   &:hover {
     box-shadow: 0px 30px 60px 0px #00000026;
   }
-`
+`;
 const Img = styled.img`
   width: 110px;
   min-height: 183px;
   object-fit: cover;
   object-position: center;
-`
+`;
 const Info = styled.section`
   padding: 10px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-`
+`;
 
 const Flex = styled.div`
   display: flex;
   align-items: center;
-`
+`;
 
 const P = styled.p`
   margin-top: 4px;
   line-height: 1.2;
   margin-bottom: 4px;
-`
+`;
 const AllBookItem = ({ book }) => {
-  const availableCopiesOfBook = useBookAvailableCopies(book)
+  const availableCopiesOfBook = useBookAvailableCopies(book);
   return (
     <Link to={`/book-details/${book.id}`}>
       <Section>
@@ -58,7 +56,10 @@ const AllBookItem = ({ book }) => {
             <BookTitle name={book.title} />
             <P>
               <BookAuthors authors={book.authors} isInline /> &nbsp;
-              <BookMeta value={` - ${formatDate(book.published_at, "yearOnly")}`} isInline={true} />
+              <BookMeta
+                value={` - ${formatDate(book.published_at, "yearOnly")}`}
+                isInline={true}
+              />
               <br />
               <BookMeta value={book.genres} />
             </P>
@@ -83,7 +84,7 @@ const AllBookItem = ({ book }) => {
         </Info>
       </Section>
     </Link>
-  )
-}
+  );
+};
 
-export default AllBookItem
+export default AllBookItem;
