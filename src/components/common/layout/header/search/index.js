@@ -10,7 +10,7 @@ import {
   startSearchProgress,
   stopSearchProgress,
   updateSearchValue,
-} from "../../../../../hooks/search";
+} from "../../../../../helpers/search";
 
 import { useHistory, useLocation } from "react-router-dom";
 
@@ -62,7 +62,7 @@ const Search = () => {
       updateSearchValue("");
       stopSearchProgress();
     }
-  }, []);
+  }, [location.pathname]);
 
   const openSearchOnMobile = () => setIsOpenOnMobile(true);
   const closeSearchOnMobile = () => setIsOpenOnMobile(false);
