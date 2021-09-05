@@ -8,6 +8,31 @@ import {
   BookPurchasesLikesAndRating,
 } from "../../../../common/book/";
 
+const FeaturedBookItemInfo = ({ book }) => {
+  return (
+    <Div>
+      <BookCopies no_of_copies={book.available_copies} featured />
+
+      <Group>
+        <BookTitle name={book.title} featured />
+        <BookAuthors authors={book.authors} />
+      </Group>
+
+      <BookMeta title="Genre" value={book.genres} featured />
+      <BookMeta title="Tags" value={book.tags} featured />
+
+      <BookPurchasesLikesAndRating
+        no_of_purchases={book.number_of_purchases}
+        no_of_likes={book.likes}
+        rating={book.rating}
+        light
+      />
+    </Div>
+  );
+};
+
+export default FeaturedBookItemInfo;
+
 const Div = styled.div`
   background-image: linear-gradient(
     rgba(0, 0, 0, 0.5),
@@ -49,28 +74,3 @@ const Group = styled.div`
     font-weight: bold;
   }
 `;
-
-const FeaturedBookItemInfo = ({ book }) => {
-  return (
-    <Div>
-      <BookCopies no_of_copies={book.available_copies} featured />
-
-      <Group>
-        <BookTitle name={book.title} featured />
-        <BookAuthors authors={book.authors} />
-      </Group>
-
-      <BookMeta title="Genre" value={book.genres} featured />
-      <BookMeta title="Tags" value={book.tags} featured />
-
-      <BookPurchasesLikesAndRating
-        no_of_purchases={book.number_of_purchases}
-        no_of_likes={book.likes}
-        rating={book.rating}
-        light
-      />
-    </Div>
-  );
-};
-
-export default FeaturedBookItemInfo;

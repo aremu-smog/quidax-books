@@ -3,6 +3,19 @@ import { Link } from "react-router-dom";
 import FeaturedBookItemInfo from "./info";
 import styled from "styled-components";
 
+const FeaturedBookItem = ({ book }) => {
+  return (
+    <StyledFeaturedBookItem>
+      <Link to={`/book-details/${book.id}`}>
+        <img src={book.image_url} alt={book.title} />
+        <FeaturedBookItemInfo book={book} />
+      </Link>
+    </StyledFeaturedBookItem>
+  );
+};
+
+export default FeaturedBookItem;
+
 const StyledFeaturedBookItem = styled.div`
   max-width: 220px;
   max-height: 330px;
@@ -22,15 +35,3 @@ const StyledFeaturedBookItem = styled.div`
     max-height: 210px;
   }
 `;
-const FeaturedBookItem = ({ book }) => {
-  return (
-    <StyledFeaturedBookItem>
-      <Link to={`/book-details/${book.id}`}>
-        <img src={book.image_url} alt={book.title} />
-        <FeaturedBookItemInfo book={book} />
-      </Link>
-    </StyledFeaturedBookItem>
-  );
-};
-
-export default FeaturedBookItem;

@@ -8,28 +8,6 @@ import BookDetailsOverview from "./overview";
 import BookDetailsFullDescription from "./full-description";
 import BookDetailsHeader from "./header";
 
-const Section = styled.section`
-  display: flex;
-  justify-content: space-between;
-  margin-top: 38px;
-  @media screen and (max-width: 768px) {
-    flex-direction: column;
-  }
-`;
-
-const Details = styled.section`
-  flex-grow: 1;
-  flex-shrink: 1;
-  margin-left: 7.5%;
-  @media screen and (max-width: 768px) {
-    margin-left: 0px;
-  }
-`;
-
-const SubHeading = styled.div`
-  margin-top: 36px;
-`;
-
 const BookContainer = ({ book }) => {
   const availableCopiesOfBook = useBookAvailableCopies(book);
   return (
@@ -60,6 +38,26 @@ const BookContainer = ({ book }) => {
   );
 };
 
-BookContainer.propTypes = {};
-
 export default BookContainer;
+
+const Section = styled.section`
+  display: flex;
+  justify-content: space-between;
+  margin-top: 38px;
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+  }
+`;
+
+const Details = styled.section`
+  flex-grow: 1;
+  flex-shrink: 1;
+  margin-left: 7.5%;
+  @media screen and (max-width: 768px) {
+    margin-left: 0px;
+  }
+`;
+
+const SubHeading = styled.div`
+  margin-top: 36px;
+`;
