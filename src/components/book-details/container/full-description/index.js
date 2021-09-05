@@ -1,10 +1,18 @@
 import React from "react";
-import PropTypes from "prop-types";
+import ReactMarkdown from "react-markdown";
+import styled from "styled-components";
 
-const BookDetailsFullDescription = () => {
-  return <div></div>;
+const FullDescription = styled.section`
+  margin-top: 32px;
+  line-height: 1.5;
+`;
+
+const BookDetailsFullDescription = ({ content }) => {
+  return (
+    <FullDescription>
+      <ReactMarkdown>{content}</ReactMarkdown>
+    </FullDescription>
+  );
 };
-
-BookDetailsFullDescription.propTypes = {};
 
 export default BookDetailsFullDescription;

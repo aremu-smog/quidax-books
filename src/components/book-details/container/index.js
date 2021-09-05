@@ -5,9 +5,9 @@ import { Container } from "../../../styles/common";
 import BookDetailsSidebar from "./sidebar";
 import BackButton from "../../common/button/back";
 import { formatDate } from "../../../helpers/date";
-import ReactMarkdown from "react-markdown";
 import { useBookAvailableCopies } from "../../../helpers/book/availableCopies";
 import BookDetailsOverview from "./overview";
+import BookDetailsFullDescription from "./full-description";
 
 const Section = styled.section`
   display: flex;
@@ -25,11 +25,6 @@ const Details = styled.section`
   @media screen and (max-width: 768px) {
     margin-left: 0px;
   }
-`;
-
-const FullDescription = styled.section`
-  margin-top: 32px;
-  line-height: 1.5;
 `;
 
 const SubHeading = styled.div`
@@ -60,9 +55,7 @@ const BookContainer = ({ book }) => {
 
           <BookDetailsOverview book={book} />
 
-          <FullDescription>
-            <ReactMarkdown>{book.full_description}</ReactMarkdown>
-          </FullDescription>
+          <BookDetailsFullDescription content={book.full_description} />
         </Details>
       </Section>
     </Container>
