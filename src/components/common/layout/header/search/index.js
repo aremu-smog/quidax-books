@@ -51,7 +51,7 @@ const StyledSubmit = styled.button`
   background-color: ${qbGray};
 `;
 const Search = () => {
-  const { value, inProgress } = useReactiveVar(searchVar);
+  const { value: searchValue, inProgress } = useReactiveVar(searchVar);
   const [isOpenOnMobile, setIsOpenOnMobile] = useState(false);
 
   const history = useHistory();
@@ -68,20 +68,16 @@ const Search = () => {
   const closeSearchOnMobile = () => setIsOpenOnMobile(false);
 
   const startSearching = (e) => {
-    if (value === "" && !inProgress) {
+    if (searchValue === "" && !inProgress) {
       startSearchProgress();
       history.push("/search");
     }
 
-    if (value !== "" && location.pathname !== "search") {
-      history.push("/search");
-    }
     updateSearchValue(e.target.value);
   };
 
   const stopSearching = () => {
     stopSearchProgress();
-
     history.goBack();
     updateSearchValue("");
   };
@@ -102,12 +98,12 @@ const Search = () => {
         </HideOnPc>
         <StyledInput
           placeholder="Search books, genres, authors, etc."
-          value={value}
+          value={searchValue}
           onChange={startSearching}
           autoFocus={inProgress}
         />
-        <StyledSubmit onClick={stopSearching}>
-          {inProgress ? <CloseIcon /> : <SearchIcon />}
+        <StyledSubmit onClick={searchValue ? stopSearching : null}>
+          {searchValue ? <CloseIcon /> : <SearchIcon />}
         </StyledSubmit>
       </Wrapper>
     </>

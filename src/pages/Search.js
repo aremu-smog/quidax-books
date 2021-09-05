@@ -69,11 +69,14 @@ const SearchPage = () => {
   });
 
   const NO_OF_RESULTS = filteredBooks.length;
-  const heading = (
-    <>
-      <b>{NO_OF_RESULTS}</b> results found for `<b>{searchValue}</b>`
-    </>
-  );
+  const heading =
+    searchValue === "" ? (
+      "How nice would it be if we could get results without searching? "
+    ) : (
+      <>
+        <b>{NO_OF_RESULTS}</b> results found for `<b>{searchValue}</b>`
+      </>
+    );
   return (
     <Layout>
       {inProgress && <Heading text={heading} />}
