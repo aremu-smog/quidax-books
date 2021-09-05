@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { ArrowIcon, CloseIcon, SearchIcon } from "../../../../../icons";
 import { qbOutlineGray, qbGray } from "../../../../../styles/colors";
@@ -12,7 +12,7 @@ import {
   updateSearchValue,
 } from "../../../../../hooks/search";
 
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 
 const Wrapper = styled.div`
   max-width: 600px;
@@ -55,6 +55,14 @@ const Search = () => {
   const [isOpenOnMobile, setIsOpenOnMobile] = useState(false);
 
   const history = useHistory();
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.pathname !== "/search") {
+      updateSearchValue("");
+      stopSearchProgress();
+    }
+  }, []);
 
   const openSearchOnMobile = () => setIsOpenOnMobile(true);
   const closeSearchOnMobile = () => setIsOpenOnMobile(false);
@@ -65,11 +73,15 @@ const Search = () => {
       history.push("/search");
     }
 
+    if (value !== "" && location.pathname !== "search") {
+      history.push("/search");
+    }
     updateSearchValue(e.target.value);
   };
 
   const stopSearching = () => {
     stopSearchProgress();
+
     history.goBack();
     updateSearchValue("");
   };
