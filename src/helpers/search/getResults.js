@@ -1,16 +1,16 @@
-import { getLongString } from "../string";
+import { getLongString } from "../string"
 export const getSearchResults = (books, searchTerm) => {
-  return books.filter((book) => {
+  return books.filter(book => {
     if (searchTerm !== "") {
-      const wordRegex = new RegExp(searchTerm, "g");
+      const wordRegex = new RegExp(searchTerm.toLowerCase(), "g")
 
-      const { title, genres, tags, authors } = book;
+      const { title, genres, tags, authors } = book
 
-      const longString = getLongString(title, genres, tags, authors);
+      const longString = getLongString(title, genres, tags, authors)
 
-      return wordRegex.test(longString);
+      return wordRegex.test(longString.toLowerCase())
     } else {
-      return false;
+      return false
     }
-  });
-};
+  })
+}
