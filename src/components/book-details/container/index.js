@@ -11,7 +11,7 @@ import BookDetailsHeader from "./header"
 const BookContainer = ({ book }) => {
   const availableCopiesOfBook = useBookAvailableCopies(book)
   return (
-    <Container boxed>
+    <Container>
       <SubHeading>
         <BackButton url='/' />
       </SubHeading>
@@ -45,8 +45,10 @@ const Section = styled.section`
   display: flex;
   justify-content: space-between;
   margin-top: 38px;
+  width: 90%;
   @media screen and (max-width: 768px) {
     flex-direction: column;
+    width: 100%;
   }
 `
 
