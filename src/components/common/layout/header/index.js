@@ -30,6 +30,10 @@ export const Header = styled.header`
   box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.05);
   display: flex;
   align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background-color: white;
 
   section {
     display: flex;
