@@ -1,16 +1,22 @@
 import { getLongString } from "../string"
 export const getSearchResults = (books, searchTerm) => {
-  return books.filter(book => {
-    if (searchTerm !== "") {
-      const wordRegex = new RegExp(searchTerm.toLowerCase(), "g")
+  let searchResults = []
 
-      const { title, genres, tags, authors } = book
+  setTimeout(() => {
+    searchResults = books.filter(book => {
+      if (searchTerm !== "") {
+        const wordRegex = new RegExp(searchTerm.toLowerCase(), "g")
 
-      const longString = getLongString(title, genres, tags, authors)
+        const { title, genres, tags, authors } = book
 
-      return wordRegex.test(longString.toLowerCase())
-    } else {
-      return false
-    }
-  })
+        const longString = getLongString(title, genres, tags, authors)
+
+        return wordRegex.test(longString.toLowerCase())
+      } else {
+        return false
+      }
+    })
+  }, 300)
+
+  return searchResults
 }
