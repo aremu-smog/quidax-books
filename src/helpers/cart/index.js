@@ -44,10 +44,10 @@ export const addItemToCart = (bookId, bookQuantity, bookPrice) => {
 
     // Add the book to cart items
     cartVar().items = [item, ...itemsInCart]
+    openCart()
   } else {
     increaseQuantity(bookInCart[0], bookQuantity)
   }
-  openCart()
 }
 
 export const removeItemFromCart = cartItem => {
