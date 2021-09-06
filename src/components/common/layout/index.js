@@ -1,7 +1,8 @@
-import React from "react";
-import Cart from "../../cart";
+import React from "react"
+import Cart from "../../cart"
+import styled from "styled-components"
 
-import MainHeader from "./header";
+import MainHeader from "./header"
 
 const Layout = ({ children }) => {
   return (
@@ -9,9 +10,13 @@ const Layout = ({ children }) => {
       <Cart />
       <MainHeader />
 
-      <main>{children}</main>
+      <Main>{children}</Main>
     </>
-  );
-};
+  )
+}
 
-export default Layout;
+export default Layout
+
+const Main = styled.main`
+  margin-bottom: 100px;
+`
