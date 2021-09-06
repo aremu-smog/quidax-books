@@ -9,14 +9,15 @@ import {
   searchVar,
   startSearchProgress,
   stopSearchProgress,
+  openSearchOnMobile,
+  closeSearchOnMobile,
   updateSearchValue
 } from "../../../../../helpers/search"
 
 import { useHistory, useLocation } from "react-router-dom"
 
 const Search = () => {
-  const { value: searchValue, inProgress } = useReactiveVar(searchVar)
-  const [isOpenOnMobile, setIsOpenOnMobile] = useState(false)
+  const { value: searchValue, inProgress, isOpenOnMobile } = useReactiveVar(searchVar)
 
   const history = useHistory()
   const location = useLocation()
@@ -27,9 +28,6 @@ const Search = () => {
       stopSearchProgress()
     }
   }, [location.pathname])
-
-  const openSearchOnMobile = () => setIsOpenOnMobile(true)
-  const closeSearchOnMobile = () => setIsOpenOnMobile(false)
 
   const startSearching = e => {
     if (searchValue === "" && !inProgress) {
@@ -44,6 +42,7 @@ const Search = () => {
     stopSearchProgress()
     history.goBack()
     updateSearchValue("")
+    closeSearchOnMobile()
   }
 
   return (
