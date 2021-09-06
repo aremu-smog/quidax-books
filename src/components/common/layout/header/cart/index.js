@@ -2,13 +2,11 @@ import React from "react"
 import styled from "styled-components"
 import { qbGreen } from "../../../../../styles/colors"
 import { CartIcon } from "../../../../../icons"
-import { useReactiveVar } from "@apollo/client"
-import { cartVar, openCart } from "../../../../../helpers/cart"
+import { openCart } from "../../../../../helpers/cart"
+import { useNoOfCartItems } from "../../../../../helpers/cart/getNoOfItems"
 
 const CartButton = () => {
-  const { items: cartItems } = useReactiveVar(cartVar)
-
-  const noOfItemsInCart = cartItems.length
+  const noOfItemsInCart = useNoOfCartItems()
   return (
     <Button onClick={() => openCart()}>
       {noOfItemsInCart > 0 ? <Counter>{noOfItemsInCart}</Counter> : null}
