@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect } from "react"
 import styled from "styled-components"
 import { ArrowIcon, CloseIcon, SearchIcon } from "../../../../../icons"
 import { qbOutlineGray, qbGray } from "../../../../../styles/colors"
