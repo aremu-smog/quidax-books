@@ -8,9 +8,10 @@ import { cartVar, openCart } from "../../../../../helpers/cart"
 const CartButton = () => {
   const { items: cartItems } = useReactiveVar(cartVar)
 
+  const noOfItemsInCart = cartItems.length
   return (
     <Button onClick={() => openCart()}>
-      <Counter>{cartItems.length}</Counter>
+      {noOfItemsInCart > 0 ? <Counter>{noOfItemsInCart}</Counter> : null}
       <CartIcon />
     </Button>
   )
